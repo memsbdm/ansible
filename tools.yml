@@ -33,6 +33,7 @@
         - wget
         - goose
         - sqlc
+        - orbstack
 
     - name: Install Rust via rustup
       shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
