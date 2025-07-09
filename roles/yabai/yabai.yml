@@ -1,0 +1,21 @@
+- name: Setup yabai
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Install yabai via Homebrew
+      homebrew:
+        name: yabai
+        state: present
+
+    - name: Create yabai configuration directory
+      shell: mkdir -p ~/.config/yabai
+      args:
+        executable: /bin/bash
+
+    - name: Copy yabai configuration file from dotfiles
+      copy:
+        src: "~/dotfiles/.config/yabai/yabairc"
+        dest: "~/.config/yabai/yabairc"
+        remote_src: true

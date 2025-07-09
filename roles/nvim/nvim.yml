@@ -1,0 +1,21 @@
+- name: Setup neovim
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Install neovim via Homebrew
+      homebrew:
+        name: neovim
+        state: present
+
+    - name: Install ripgrep via Homebrew
+      homebrew:
+        name: ripgrep
+        state: present
+
+    - name: Copy Neovim configuration folder from dotfiles
+      copy:
+        src: "~/dotfiles/.config/nvim"
+        dest: "~/.config"
+        remote_src: true

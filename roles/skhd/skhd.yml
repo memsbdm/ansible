@@ -1,0 +1,21 @@
+- name: Setup skhd
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Install skhd via Homebrew
+      homebrew:
+        name: skhd
+        state: present
+
+    - name: Create skhd configuration directory
+      shell: mkdir -p ~/.config/skhd
+      args:
+        executable: /bin/bash
+
+    - name: Copy skhd configuration file from dotfiles
+      copy:
+        src: "~/dotfiles/.config/skhd/skhdrc"
+        dest: "~/.config/skhd/skhdrc"
+        remote_src: true

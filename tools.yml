@@ -1,0 +1,47 @@
+- name: Setup tools
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Install Volta (Node.js version manager)
+      shell: curl https://get.volta.sh | bash
+      args:
+        executable: /bin/bash
+      register: volta_install
+      changed_when: "'already installed' not in volta_install.stderr"
+
+    - name: Install Node.js LTS using Volta
+      shell: volta install node@lts
+      args:
+        executable: /bin/bash
+      changed_when: false
+
+    - name: Install Yarn using Volta
+      shell: volta install yarn
+      args:
+        executable: /bin/bash
+      changed_when: false
+
+    - name: Install CLI tools via Homebrew
+      homebrew:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - jq
+        - wget
+        - goose
+        - sqlc
+
+    - name: Install Rust via rustup
+      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      args:
+        executable: /bin/bash
+      changed_when: false
+
+    - name: Clone dotfiles
+      git:
+        repo: https://github.com/memsbdm/dotfiles.git
+        dest: "~/dotfiles"
+        depth: 1

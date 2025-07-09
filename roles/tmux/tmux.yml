@@ -1,0 +1,16 @@
+- name: Setup tmux
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Install tmux via Homebrew
+      homebrew:
+        name: tmux
+        state: present
+
+    - name: Copy tmux configuration file from dotfiles
+      copy:
+        src: "~/dotfiles/.tmux.conf"
+        dest: "~/.tmux.conf"
+        remote_src: true
