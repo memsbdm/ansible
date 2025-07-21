@@ -22,8 +22,7 @@ chmod +x setup.sh
 - **iTerm2** `ansible-playbook roles/iterm2/iterm2.yml` (+ README.md)
 - **Nvim** `ansible-playbook roles/nvim/nvim.yml`
 - **Tmux** `ansible-playbook roles/tmux/tmux.yml`
-- **Yabai** `ansible-playbook roles/yabai/yabai.yml`
-- **Skhd** `ansible-playbook roles/skhd/skhd.yml`
+- **Aerospace** `ansible-playbook roles/aerospace/aerospace.yml`
 
 ## Manual installations
 

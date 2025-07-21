@@ -1,0 +1,21 @@
+- name: Setup aerospace
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Install aerospace via Homebrew
+      homebrew_cask:
+        name: aerospace
+        state: present
+
+    - name: Remove existing config file
+      shell: rm -f ~/.aerospace.toml
+      args:
+        executable: /bin/bash
+
+    - name: Copy new config file from dotfiles
+      copy:
+        src: "~/dotfiles/.aerospace.toml"
+        dest: "~/.aerospace.toml"
+        remote_src: true
